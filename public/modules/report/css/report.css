@@ -1,0 +1,752 @@
+.nav-pills .nav-link {
+    margin: 0px !important;
+}
+
+.tab-content {
+    padding-top: -10px !important;
+    padding-bottom: -10px !important;
+}
+
+
+
+/* date picker */
+
+.date-separator {
+    color: #6b7280;
+    font-size: 16px;
+    padding: 0 4px;
+}
+
+.date-range-wrapper {
+    border: 1px solid #d8d6d6 !important;
+    border-radius: 4px;
+    padding-right: 8px;
+}
+
+input.datePickerfield {
+    border: none !important;
+    width: 130px !important;
+    font-size: 16px;
+    color: #777575 !important;
+    font-weight: 500;
+}
+
+.dateIcon {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #777575 !important;
+    font-size: 18px;
+}
+
+.date-input {
+    position: relative !important;
+}
+
+.datePickerfield:focus {
+    box-shadow: none;
+}
+
+/* earning summary */
+
+.containerSummary {
+    background-color: #f6f7f9;
+}
+
+.summary-card {
+    max-width: 540px;
+    margin: auto;
+    padding: 32px 28px;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.summary-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.summary-date {
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.summary-row {
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 14px;
+}
+
+.amount-positive {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.amount-negative {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.total-box {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.total-box .row {
+    margin-bottom: 6px;
+}
+
+.total-profit {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+
+/* Chart style */
+#sale-analytics-chart .apexcharts-bar-series path:hover {
+    fill: #51AF5B !important;
+    fill-opacity: 0.5 !important;
+    transition: 0.3s fill ease;
+}
+
+
+
+
+/* Targets the donut slices in ApexCharts */
+#cost-analytics-chart .apexcharts-series path {
+    filter: url(#inner-shadow);
+    transition: all 0.3s ease;
+}
+
+/* Optional: Make it look even "fatter" and more 3D on hover */
+#cost-analytics-chart .apexcharts-series path:hover {
+    filter: none;
+    /* Removes inner shadow on hover for a "pop out" effect */
+    stroke-width: 4px;
+}
+
+
+
+
+/* custom legends */
+.custom_legend_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+}
+
+.custom_legend_container .legend_name {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 157%;
+    text-align: center;
+    color: #687387;
+    margin: 0px;
+}
+
+.custom_legend_container .legend_value {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 157%;
+    text-align: center;
+    color: #17181D;
+    margin: 0px;
+}
+
+.custom_legend_container .legend_symbol {
+    display: inline-block;
+    border-radius: 4px;
+    width: 40px;
+    height: 6px;
+}
+
+.custom_legend_container .legend_1 {
+
+    background: #84cd8c;
+}
+
+
+.custom_legend_container .legend_2 {
+
+    background: #EFC23D;
+}
+
+.custom_legend_container .legend_3 {
+
+    background: #F35E54;
+}
+
+.custom_legend_container .legend_4 {
+
+    background: #4086E1;
+}
+
+
+/* common class css */
+/* ========================
+   Grid Container
+   ======================== */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+    /* default gap, same as Tailwind's gap-6 */
+}
+
+/* Gap utilities (optional - adjust as needed) */
+/* .gap-0 { gap: 0; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; } */
+
+/* ========================
+   Grid Columns (grid-cols-*)
+   ======================== */
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* Responsive: md (≥768px) */
+@media (min-width: 768px) {
+    .md\:grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-5 {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-12 {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .md\:gap-4 {
+        gap: 1rem;
+    }
+
+    .md\:gap-6 {
+        gap: 1.5rem;
+    }
+}
+
+/* Responsive: lg (≥1024px) */
+@media (min-width: 1024px) {
+    .lg\:grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .lg\:grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+/* ========================
+   Column Span (col-span-*)
+   ======================== */
+.col-span-1 {
+    grid-column: span 1 / span 1;
+}
+
+.col-span-2 {
+    grid-column: span 2 / span 2;
+}
+
+.col-span-3 {
+    grid-column: span 3 / span 3;
+}
+
+.col-span-4 {
+    grid-column: span 4 / span 4;
+}
+
+.col-span-5 {
+    grid-column: span 5 / span 5;
+}
+
+.col-span-6 {
+    grid-column: span 6 / span 6;
+}
+
+.col-span-7 {
+    grid-column: span 7 / span 7;
+}
+
+.col-span-8 {
+    grid-column: span 8 / span 8;
+}
+
+.col-span-9 {
+    grid-column: span 9 / span 9;
+}
+
+.col-span-10 {
+    grid-column: span 10 / span 10;
+}
+
+.col-span-11 {
+    grid-column: span 11 / span 11;
+}
+
+.col-span-12 {
+    grid-column: span 12 / span 12;
+}
+
+.col-span-full {
+    grid-column: 1 / -1;
+}
+
+/* Responsive col-span */
+@media (min-width: 768px) {
+    .md\:col-span-1 {
+        grid-column: span 1 / span 1;
+    }
+
+    .md\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+
+    .md\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+
+    .md\:col-span-4 {
+        grid-column: span 4 / span 4;
+    }
+
+    .md\:col-span-6 {
+        grid-column: span 6 / span 6;
+    }
+
+    .md\:col-span-full {
+        grid-column: 1 / -1;
+    }
+}
+
+/* lg: col-span (≥1024px) - NOW FULLY COMPLETE */
+@media (min-width: 1024px) {
+    .lg\:col-span-1 {
+        grid-column: span 1 / span 1;
+    }
+
+    .lg\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+
+    .lg\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+
+    .lg\:col-span-4 {
+        grid-column: span 4 / span 4;
+    }
+
+    .lg\:col-span-5 {
+        grid-column: span 5 / span 5;
+    }
+
+    .lg\:col-span-6 {
+        grid-column: span 6 / span 6;
+    }
+
+    .lg\:col-span-7 {
+        grid-column: span 7 / span 7;
+    }
+
+    .lg\:col-span-8 {
+        grid-column: span 8 / span 8;
+    }
+
+    .lg\:col-span-9 {
+        grid-column: span 9 / span 9;
+    }
+
+    .lg\:col-span-10 {
+        grid-column: span 10 / span 10;
+    }
+
+    .lg\:col-span-11 {
+        grid-column: span 11 / span 11;
+    }
+
+    .lg\:col-span-12 {
+        grid-column: span 12 / span 12;
+    }
+
+    .lg\:col-span-full {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Optional: column start/end for advanced control */
+.col-start-1 {
+    grid-column-start: 1;
+}
+
+.col-start-2 {
+    grid-column-start: 2;
+}
+
+.col-start-3 {
+    grid-column-start: 3;
+}
+
+.col-end-1 {
+    grid-column-end: 1;
+}
+
+.col-end-2 {
+    grid-column-end: 2;
+}
+
+.col-end-4 {
+    grid-column-end: 4;
+}
+
+
+
+
+
+/* custom inputs */
+.custom_date_input {
+    appearance: none;
+    /* Removes default styling */
+    -webkit-appearance: none;
+
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+
+    /* Add your custom icon here */
+    background: url('../assets/icons/home/calendar.svg') no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+
+/* Hide the default icon in WebKit browsers */
+.custom_date_input::-webkit-calendar-picker-indicator {
+    appearance: none;
+    -webkit-appearance: none;
+    opacity: 0;
+    /* Keeps it clickable but invisible */
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+}
+
+
+/* outline */
+.outline-none {
+    outline-style: none;
+}
+
+
+/* buttons */
+.btn-sm-one {
+    border: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: transparent;
+    width: fit-content;
+    height: 32px;
+    transition: all 0.2s ease;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.btn-sm-one:hover {
+    background-color: var(--theme-hover-bg, #076988);
+    border-color: var(--theme-color, #076988);
+    cursor: pointer;
+}
+
+.btn-sm-one p {
+    margin: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 32px;
+    color: #687387;
+    transition: all 0.2s ease;
+}
+
+.btn-sm-one:hover p {
+    font-weight: 600;
+    color: var(--theme-color, #076988);
+}
+
+
+
+.seleted {
+    background-color: var(--theme-hover-bg, #076988);
+    border: 1px solid var(--theme-color, #076988);
+    transition: all 0.2s ease;
+}
+
+.seleted p {
+    color: var(--theme-color, #076988);
+}
+
+
+
+
+/* title */
+.title_sm {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.order_state {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 157%;
+    text-align: center;
+    color: #51AF5B;
+    border-radius: 4px;
+    padding: 0px 12px;
+    background-color: #F3FAF3;
+}
+
+
+
+/* category card */
+.category_card {
+    padding: 8px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    background: #F6F7F9;
+    border-radius: 8px;
+}
+
+.category_card div {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px
+}
+
+.category_card img {
+    border: 1px solid #51AF5B;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.category_card p {
+    margin: 0px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 157%;
+    color: #24262d;
+}
+
+.sell_status {
+    display: inline-block;
+    width: fit-content;
+    text-wrap: nowrap;
+    height: fit-content;
+    background-color: white;
+    border: 1px solid #51AF5B;
+    border-radius: 16px;
+    padding: 0px 12px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 167%;
+    text-align: center;
+    color: #24262d;
+}
+
+
+
+/* category card */
+.selling_card {
+    padding: 8px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+    background: #F6F7F9;
+    border-radius: 8px;
+}
+
+.selling_card div {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px
+}
+
+.selling_card img {
+    border: 1px solid #51AF5B;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.selling_card p {
+    margin: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 157%;
+    color: #24262d;
+}
+
+.sell_status {
+    display: inline-block;
+    width: fit-content;
+    text-wrap: nowrap;
+    height: fit-content;
+    background-color: white;
+    border: 1px solid #51AF5B;
+    border-radius: 16px;
+    padding: 0px 12px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 167%;
+    text-align: center;
+    color: #24262d;
+}
+
+
+.bg_col_primary {
+    background-color: var(--theme-color) !important;
+}
+
+
+
+/* table styles */
+
+
+
+
+/* glass */
+.glassmorphism {
+    border-radius: 8px;
+    padding: 16px;
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* box design */
+.glassmorphismIconBox {
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.24);
+    background: rgba(255, 255, 255, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glassmorphism.box-1 {
+    background: #F2F9FF;
+}
+
+.box-1 .price {
+    color: #046fcd !important;
+}
+
+.glassmorphism.box-2 {
+    background: #F4FFF9;
+}
+
+.box-2 .price {
+    color: #02b55f !important;
+}
+
+.glassmorphism.box-3 {
+    background: #FFF6F6;
+}
+
+.box-3 .price {
+    color: #ec1e1e !important;
+}
+.glassmorphism.box-4 {
+    background: #FFFDF5;
+}
+
+.box-4 .price {
+    color: #fde619 !important;
+}
+.glassmorphism.box-5 {
+    background: #F9F2FF;
+}
+
+.box-5 .price {
+    color: #bc3cf3 !important;
+}

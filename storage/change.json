@@ -1,0 +1,432 @@
+[
+    {
+        "version": "4.2.3",
+        "date": "29 December 2025",
+        "notes": [
+            "Message option in Single Vendor checkout: Users can now add a message when placing an order.",
+            "Guest Checkout: Customers can complete purchases without creating an account or signing in.",
+            "Estimated Delivery Date format updated: Now supports hours or days (e.g., \"2 hours", "3 days\") with data type changed from integer to string.",
+            "Account verification OTP: Fixed OTP verification delay/failure issue for some users."
+        ]
+    },
+    {
+        "version": "4.2.2",
+        "date": "19 November 2025",
+        "notes": [
+            "Fixed minor code errors",
+            "Optimized admin panel code for better stability",
+            "Improved overall system performance",
+            "Variant-wise product price not updating in POS when switching POS page",
+            "Ensured coupon applies only once per order in POS draft flow",
+            "Fixed variant price calculation when quantity is more than one",
+            "Fixed OTP sending null for SMS and Email",
+            "Fixed customer and employee creation issue (password mismatch but still creating account)",
+            "Push notification issue resolved",
+            "Fixed “Mark as Received” error in Purchase Details",
+            "Improvement: In Purchase Invoices, renamed “Quantity” to “Total Product”",
+            "Fixed logo not showing in Ready eCommerce invoices",
+            "Fixed date-wise order statistics issue in Dashboard",
+            "Fixed Edit button showing wrong product details when switching POS pages",
+            "Fixed wallet-related issues in Driver Details page",
+            "Fixed draft multiple submit issue (stayed on same page)",
+            "Ensured Admin-as-Shop can collect store voucher in cart",
+            "Fixed product price not updating on size selection"
+        ]
+    },
+    {
+        "version": "4.2.1",
+        "date": "04 November 2025",
+        "notes": [
+            "Update Some dependencies",
+            "Project running speed optimized",
+            "Add Extension installer feature",
+            "Update feature protected by admin role"
+        ]
+    },
+    {
+        "version": "4.2.0",
+        "date": "05 October 2025",
+        "notes": [
+            "Updated some dependencies",
+            "Optimized project running speed",
+            "Added extension installer feature",
+            "Protected update feature with admin role access",
+            "Resolved digital product add issue",
+            "Optimized app code",
+            "Code fixes and optimizations applied"
+
+        ]
+    },
+    {
+        "version": "4.1.0",
+        "date": "01 October 2025",
+        "notes": [
+            "Admin Panel & Customer App",
+            "New Feature: Added Digital Products Module in Admin Panel",
+            "File Upload: Support for digital attachments (PDF, ZIP, DOC, etc.)",
+            "License System: Unique license key/ID for each digital product",
+            "Frontend Update: New Digital Product menu for users",
+            "Direct Purchase: Digital products can be purchased directly with instant delivery",
+            "Download Access: Customers can download attachments & licenses after successful payment",
+            "User Dashboard: Added \"My Digital Products\" section to view purchased items separately"
+        ]
+    },
+    {
+        "version": "4.0.0",
+        "date": "03 September 2025",
+        "notes": [
+            "Return & Refund Request with admin-set timeframe.",
+            "Refund Request Process with seller review and admin approval/cancel.",
+            "AI Blog Generator with custom prompts.",
+            "Product list in admin panel: grid & list view options.",
+            "Order details page: total tax amount + indicator text.",
+            "Customer profile: filled state icons for clicked sections.",
+            "Performance and stability enhancements."
+        ]
+    },
+    {
+        "version": "3.8.0",
+        "date": "26 August 2025",
+        "notes": [
+            "Redesigned Admin Panel Sidebar for better accessibility.",
+            "Improved navigation flow across all admin sections.",
+            "AI-generated product descriptions for faster product uploads.",
+            "AI-generated legal page content for ready-to-use pages.",
+            "Fixed Shop Dashboard URL issue for correct data fetching.",
+            "Minor UI/UX improvements that make everything smoother.",
+            "General performance optimizations.",
+            "Resolved internal messaging & conversations issues.",
+            "Improved installation process with fewer steps.",
+            "Refactored payment gateway source codes for stability.",
+            "Overall source code more optimized and cleaner."
+        ]
+    },
+    {
+        "version": "3.7.0",
+        "date": "15 July 2025",
+        "notes": [
+            "default credentials set",
+            "Feature update: Socials links using the social icons",
+            "Feature update: Message sections now moved to Conversations section",
+            "Bug Fix: Product prices now display with correct decimal values",
+            "Added Super Admin creation step during installation",
+            "Improved the overall installation process",
+            "Removed the username field from CodeCanyon verification screen",
+            "Fixed logo display issue on the landing page",
+            "Refactored code for better readability and performance",
+            "Updated third-party packages to latest stable versions",
+            "Code issue fixing",
+            "Code optimize."
+        ]
+    },
+    {
+        "version": "3.6.0",
+        "date": "22 May 2025",
+        "notes": [
+            "Customer-Seller Live Chat Integration",
+            "Product Card in Chat Window",
+            "Seller Profile Chat Settings",
+            "Interactive & Realistic Chat Dashboard",
+            "Enhanced Chat System on Seller Dashboard",
+            "Minor Bug Fixes & UI Enhancements",
+            "Resolved issue with product image not updating on variant change",
+            "Fixed broken links on the customer order history page",
+            "Corrected tax calculation inconsistency in multi-vendor carts",
+            "Addressed minor alignment issues in product grid view",
+            "Improved mobile responsiveness for cart and checkout pages"
+        ]
+    },
+    {
+        "version": "3.5.1",
+        "date": "08 May 2025",
+        "notes": [
+            "Updated subscription plan design for a better look",
+            "Simplified and improved subscription logic",
+            "Added commission and subscription settings in Business Settings",
+            "Improved seller subscription UI",
+            "Added warning message for expired seller subscriptions",
+            "Fixed subscription payment gateway issue"
+        ]
+    },
+    {
+        "version": "3.5.0",
+        "date": "06 May 2025",
+        "notes": [
+            "Introduced a seller subscription system.",
+            "Implemented automatic subscription expiration handling.",
+            "Added the ability to set sales limits for sellers.",
+            "Enabled configurable subscription expiration date and time.",
+            "Automated removal of seller profiles and products upon subscription expiration.",
+            "Resolved issues related to Dynamic Menu Management implementation.",
+            "Fixed customer account verification issues.",
+            "Improved product video display functionality."
+        ]
+    },
+    {
+        "version": "3.4.1",
+        "date": "20 April 2025",
+        "notes": [
+            "Mobile app issue fixes",
+            "Code optimizations"
+        ]
+    },
+    {
+        "version": "3.4.0",
+        "date": "12 March 2025",
+        "notes": [
+            "Dynamic Menu Management implemented for better navigation.",
+            "Manage Pages feature added for enhanced content control.",
+            "Customer Profile Dropdown updated with new menu options:",
+            "Order History",
+            "My Profile",
+            "Country List now manageable from the Admin Panel.",
+            "Default 5-Star Rating Display issue fixed.",
+            "Various Bug Fixes to improve system stability.",
+            "VAT & Taxes can now be set on an order basis.",
+            "Product-Based VAT & Taxes removed for a more flexible tax setup.",
+            "POS VAT & Taxes configuration added.",
+            "POS Product Pagination introduced for improved product browsing.",
+            "Product Social Sharing enabled for better engagement.",
+            "Cash on Delivery & Online Payment Options can now be enabled/disabled from the Admin Panel.",
+            "Footer Section Content is now dynamically managed via the Admin Interface"
+        ]
+    },
+    {
+        "version": "3.3.0",
+        "date": "05 March 2025",
+        "notes": [
+            "Product Video Support: Fix & improve product videos feature.",
+            "Shop Banner Responsive: Resolved shop banner Responsive issue.",
+            "Phone Number Validation: Fix phone number validation from Admin panel.",
+            "Order Payment Slip Printing: Fix printing payment slips feature issue.",
+            "RTL Support: Solve Full RTL support issue on frontend.",
+            "Refactor: Remove some garbage code make more clean and optimize.",
+            "Order placement: Fix Admin control for order placement verification Issue"
+        ]
+    },
+    {
+        "version": "3.2.1",
+        "date": "20 February 2025",
+        "notes": [
+            "Customer account verification added",
+            "Admin control for order placement verification",
+            "Code optimizations"
+        ]
+    },
+    {
+        "version": "3.2.0",
+        "date": "11 February 2025",
+        "notes": [
+            "Product Video Support: Added feature for product videos.",
+            "Multi-Currency System: Multi-currency support implemented.",
+            "Order & Reorder Confirmation Emails: Sent to users on order placement and reorder.",
+            "Mail Configuration Test: Added mail send option for configuration verification.",
+            "Shop Banner Fix: Resolved shop banner display issue.",
+            "Multi-Language Invoice Support: Enabled language options for invoices.",
+            "Phone Number Validation: Admin panel now controls phone number validation.",
+            "Order Payment Slip Printing: New feature for printing payment slips.",
+            "Support Ticket Changes: Removed attachment download; LightGallery integrated for viewing.",
+            "Support Ticket Module Relocation: Moved to root directory.",
+            "Social Media Icons: Real icons added; more options in admin panel.",
+            "Footer Design: Improved web frontend footer.",
+            "Authentication Loading Requests: Shows loading for login, registration, password reset, and OTP.",
+            "Laravel Update: Upgraded from v10.* to v11.31.",
+            "Products Menu: New menu added to the navigation bar.",
+            "Skeletor Loader: Added on various pages (shops, products, etc.).",
+            "Backend Improvements: Removed deprecated code and improved order repository.",
+            "OTP Mail Design: Enhanced OTP mail design.",
+            "RTL Support: Full RTL support added for web frontend."
+        ]
+    },
+    {
+        "version": "3.1.0",
+        "date": "26 January 2025",
+        "notes": [
+            "Blog Feature Added",
+            "Code Refactored",
+            "Issues Resolved",
+            "Skeleton Loader on Home Page",
+            "Backend Improved"
+        ]
+    },
+    {
+        "version": "3.0.0",
+        "date": "16 January 2025",
+        "notes": [
+            "Improved admin dashboard UI with Dark/Light mode options.",
+            "Added a menu search feature for faster navigation.",
+            "Optimized theme color generation system.",
+            "Updated the admin icon pack for consistency.",
+            "Flutter Code Optimization",
+            "Code optimize."
+
+        ]
+    },
+    {
+        "version": "2.7.0",
+        "date": "25 December 2024",
+        "notes": [
+            "Fixed The Search Bar Issue",
+            "Flutter Code Optimization",
+            "Code optimize."
+        ]
+    },
+    {
+        "version": "2.6.0",
+        "date": "28 November 2024",
+        "notes": [
+            "Added VAT and tax management in business settings.",
+            "Enabled VAT calculation for size and color-specific pricing on the customer website.",
+            "Flash Deals now show a \"Coming Soon\" indicator in the admin dashboard.",
+            "Resolved size and color extra price addition issue.",
+            "Fixed Flash Deal discount percentage calculation.",
+            "\"Buy Now\" product display bug on the customer website fixed.",
+            "Enhanced the Flash Sale product section in the shop."
+        ]
+    },
+    {
+        "version": "2.5.0",
+        "date": "20 November 2024",
+        "notes": [
+            "Website Google login issue fixed",
+            "Customer app unauthorized error fixed",
+            "Code optimizations"
+        ]
+    },
+    {
+        "version": "2.4.0",
+        "date": "27 October 2024",
+        "notes": [
+            "Flash deal feature fully implemented.",
+            "Social login system (Google and Apple).",
+            "Admin settings for social configuration.",
+            "Google Captcha for user verification.",
+            "Improved flash deal design.",
+            "Merged menu and category management.",
+            "Resolved support ticket issues.",
+            "Fixed category merging problem.",
+            "Addressed cache issues.",
+            "Fixed seeder problems.",
+            "Streamlined user permissions."
+
+        ]
+    },
+    {
+        "version": "2.3.0",
+        "date": "06 October 2024",
+        "notes": [
+            "Role Management: Assign and manage user roles.",
+            "Role-wise Permissions: Customize access levels for roles.",
+            "Employee Management: Oversee employee details and status.",
+            "Employee Permissions: Define access rights for individual employees.",
+            "Customer Registration: OTP verification control added.",
+            "OTP Methods: Added phone/email options for registration and password recovery.",
+            "Shop Employee Management: Manage shop staff efficiently.",
+            "Employee Permissions: Tailored access control for shop employees.",
+            "Code optimization for improved performance."
+        ]
+    },
+    {
+        "version": "2.2.0",
+        "date": "01 October 2024",
+        "notes": [
+            "Single vendor: all menus displayed in admin sidebar.",
+            "Language management system update.",
+            "Language JSON file export/import feature added.",
+            "Multi-vendor shop registration from web feature enabled.",
+            "Code optimization for improved performance."
+
+        ]
+    },
+    {
+        "version": "1.1.6",
+        "date": "19 September 2024",
+        "notes": [
+            "Resolved customer creation error in Shop POS.",
+            "Fixed issue with deleting draft products in Shop POS.",
+            "Added clear messages for TIMEZONE setting issues.",
+            "Solved language creation issue.",
+            "Enhanced theme color generation and custom theme color settings.",
+            "Added buy_price field to products.",
+            "Improved validation in the admin panel.",
+            "Fixed responsive design issues on the POS page.",
+            "Enabled country selection and phone code display during customer registration.",
+            "Updated customer profile with country selection."
+        ]
+    },
+    {
+        "version": "1.1.5",
+        "date": "24 August 2024",
+        "notes": [
+            "POS responsive, product draft.",
+            "User Overview graph section responsive in dashboard.",
+            "In Single shop mode, other shops products display bug fix.",
+            "Discount amount issue fix in Invoice.",
+            "Online payment added issue fix in Dashboard wallet.",
+            "Payments are added to the Dashboard for products that have been sold by the POS.",
+            "Products color and size selecting issue fix.",
+            "Error issue fix when Adding or Deleting products from the list after applying a coupon code.",
+            "In case of products size and color, null display issue fix in POS product list."
+        ]
+    },
+    {
+        "version": "1.1.4",
+        "date": "13 August 2024",
+        "notes": [
+            "Customer app unauthorized error fixed",
+            "Code optimizations"
+        ]
+    },
+    {
+        "version": "1.1.3",
+        "date": "31 July 2024",
+        "notes": [
+            "Customer app automatic scrolling feature for the banners on the home screen.",
+            "Fixed some missing localization on app.",
+            "Improved the error handling code on app.",
+            "Fixed some UI related issues on app.",
+            "Show an unauthorized warning dialog where user need to authorize on app.",
+            "Code optimize."
+
+        ]
+    },
+    {
+        "version": "1.1.2",
+        "date": "03 July 2024",
+        "notes": [
+            "Update Firebase notification config from admin panel.",
+            "Customer login passport API key generate issue fixed.",
+            "SupportTicket system enable/use and route not found related issue fixed.",
+            "SMS Gateway config issue fixed and SMS sent for OTP Verification."
+        ]
+    },
+    {
+        "version": "1.1.1",
+        "date": "29 June 2024",
+        "notes": [
+            "Multi-language issue on customer app fixed",
+            "All product view issues fixed"
+        ]
+    },
+    {
+        "version": "1.1.0",
+        "date": "24 June 2024",
+        "notes": [
+            "Import and Export Feature in Admin Panel.",
+            "Multiple SMS Gateway Integration.",
+            "Nested category or SubCategory Feature Added.",
+            "Notification Feature Integration for Customer Mobile App.",
+            "Dark and Light Theme For Customer Mobile App.",
+            "Super Admin Users listing View.",
+            "Seller App Side Menu Update Same as Super Admin.",
+            "Bug fixing, Code Optimize and UI Improvements."
+        ]
+    },
+    {
+        "version": "1.0",
+        "date": "04 June 2024",
+        "notes": [
+            "Initial release for Mobile and Web Admin"
+        ]
+    }
+]
