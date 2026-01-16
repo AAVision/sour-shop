@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependencies
+node_modules
+vendor
+
+# Laravel
+bootstrap/cache/*
+storage/logs/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/cache/*
+.env
+.env.testing
+.env.*.php
+
+# Build
+public/build
+public/hot
+
+# Testing
+tests
+phpunit.xml
+.phpunit.result.cache
+
+# Docker
+docker
+.dockerignore
+Dockerfile
+docker-compose*.yml
+
+# Misc
+README.md
+.editorconfig
+.gitpod.yml
+sail
+Makefile

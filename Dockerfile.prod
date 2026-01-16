@@ -1,0 +1,78 @@
+# Production Dockerfile for Coolify
+# Optimized for minimal size and fast builds
+
+FROM php:8.2-fpm-alpine
+
+LABEL maintainer="eCommerce Team"
+LABEL description="Ready eCommerce Docker image for Coolify deployment"
+
+# Install system dependencies
+RUN apk add --no-cache \
+    curl \
+    wget \
+    git \
+    zip \
+    unzip \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libxml2-dev \
+    libzip-dev \
+    oniguruma-dev \
+    postgresql-dev \
+    mysql-client \
+    netcat-openbsd \
+    dcron \
+    && rm -rf /var/cache/apk/*
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install -j$(nproc) \
+    gd pdo pdo_mysql pdo_pgsql xml zip mbstring bcmath exif intl opcache
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /app
+
+# Copy application code
+COPY . .
+
+# Install PHP dependencies (production)
+RUN composer install \
+    --no-interaction \
+    --no-dev \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-scripts \
+    --no-progress
+
+# Install Node (for build)
+RUN apk add --no-cache nodejs npm && \
+    npm ci && \
+    npm run build && \
+    npm prune --production && \
+    apk del nodejs npm
+
+# Copy PHP and entrypoint configs
+COPY docker/php/conf.d/php.ini /usr/local/etc/php/conf.d/99-custom.ini
+COPY docker/php/conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY docker/entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+# Set permissions
+RUN chown -R www-data:www-data /app && \
+    chmod -R 775 /app/storage /app/bootstrap/cache && \
+    mkdir -p /app/storage/logs /app/storage/framework/{sessions,views,cache}
+
+USER www-data
+
+EXPOSE 9000
+
+# Health check (checks PHP-FPM is listening)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD nc -z localhost 9000 || exit 1
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php-fpm"]
