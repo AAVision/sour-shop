@@ -32,11 +32,11 @@ return [
         'JSON',
         'cURL',
         'fileinfo',
-        'gmp',
+        // 'gmp',
         'xml',
         'zip',
         'sodium',
-        'bcMath',
+        // 'bcMath',
     ],
 
     /*
