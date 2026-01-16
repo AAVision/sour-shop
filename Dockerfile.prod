@@ -32,6 +32,7 @@ RUN apk add --no-cache \
     libwebp-dev
 
 # Install PHP extensions including GD
+# Note: We're installing extensions in the builder stage to satisfy composer requirements
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
     gd \
@@ -68,8 +69,9 @@ RUN composer install --no-dev --optimize-autoloader \
 # -------------------------------
 FROM php:8.3-fpm-alpine
 
-# Runtime dependencies and dev packages for building PHP extensions
+# Install system dependencies (only runtime)
 RUN apk add --no-cache \
+    bash \
     curl \
     gmp \
     libsodium \
@@ -77,34 +79,29 @@ RUN apk add --no-cache \
     libxml2 \
     oniguruma \
     zip \
-    bash \
     nodejs \
     npm \
     # GD runtime dependencies
     freetype \
     libjpeg-turbo \
     libpng \
-    libwebp \
-    # Add dev packages for building PHP extensions
-    libxml2-dev \
-    zlib-dev \
-    bzip2-dev \
-    gmp-dev \
-    libsodium-dev \
-    oniguruma-dev \
-    libzip-dev \
+    libwebp
+
+# Install PHP extensions using docker-php-ext-install directly
+# This bypasses the problematic build system
+RUN apk add --no-cache --virtual .build-deps \
+    $PHPIZE_DEPS \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libwebp-dev \
-    autoconf \
-    gcc \
-    g++ \
-    make \
-    pkgconfig
-
-# Install PHP extensions (only in production stage)
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    libxml2-dev \
+    zlib-dev \
+    gmp-dev \
+    libsodium-dev \
+    oniguruma-dev \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
     gd \
     mbstring \
@@ -118,29 +115,17 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     bcmath \
     curl \
     sodium \
-    opcache
+    opcache \
+    && apk del --no-cache .build-deps
 
-# Clean up dev packages to reduce image size
-RUN apk del --no-cache \
-    libxml2-dev \
-    zlib-dev \
-    bzip2-dev \
-    gmp-dev \
-    libsodium-dev \
-    oniguruma-dev \
-    libzip-dev \
-    freetype-dev \
-    libjpeg-turbo-dev \
-    libpng-dev \
-    libwebp-dev \
-    autoconf \
-    gcc \
-    g++ \
-    make \
-    pkgconfig
+# Alternative: Use pecl for extensions if docker-php-ext-install fails
+# RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+#     && pecl install redis \
+#     && docker-php-ext-enable redis \
+#     && apk del .build-deps
 
-# Copy PHP config
-COPY docker/php/local.ini /usr/local/etc/php/conf.d/99-local.ini
+# Copy PHP config if exists
+COPY docker/php/local.ini /usr/local/etc/php/conf.d/99-local.ini 2>/dev/null || echo "No local.ini found, using default PHP config"
 
 # Set working directory
 WORKDIR /app
@@ -154,8 +139,15 @@ RUN mkdir -p /app/storage/logs /app/bootstrap/cache \
     && chmod -R 777 /app/storage /app/bootstrap \
     && chmod -R 775 /app/app/Providers /app/lang /app/routes
 
-# Expose port (optional for Octane)
-EXPOSE 80
+# Create php-fpm user if it doesn't exist
+RUN addgroup -g 1000 -S www-data && adduser -u 1000 -S www-data -G www-data || true
+
+# Expose port
+EXPOSE 9000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD php-fpm -t || exit 1
 
 # Start PHP-FPM
-CMD ["php-fpm"]
+CMD ["php-fpm", "-R"]
