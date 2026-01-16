@@ -182,6 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\SmsServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
+        App\Providers\WebInstallerServiceProvider::class,
 
     ])->toArray(),
 
