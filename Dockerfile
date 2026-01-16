@@ -1,3 +1,4 @@
+# Builder stage
 FROM php:8.2-fpm-alpine as builder
 
 # Install system dependencies
@@ -13,7 +14,15 @@ RUN apk add --no-cache \
     zlib-dev \
     bzip2-dev \
     gmp-dev \
-    libsodium-dev
+    libsodium-dev \
+    oniguruma-dev \
+    nodejs \
+    npm \
+    bash \
+    pkgconfig \
+    make \
+    gcc \
+    musl-dev
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -32,9 +41,6 @@ RUN docker-php-ext-install \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install Node.js and npm
-RUN apk add --no-cache nodejs npm
 
 # Set working directory
 WORKDIR /app
@@ -57,7 +63,8 @@ RUN apk add --no-cache \
     libxml2 \
     gmp \
     libsodium \
-    curl
+    curl \
+    oniguruma
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -83,7 +90,7 @@ WORKDIR /app
 # Copy built application from builder
 COPY --from=builder --chown=www-data:www-data /app /app
 
-# Create necessary directories with proper permissions
+# Set permissions
 RUN mkdir -p /app/storage/logs /app/bootstrap/cache && \
     chown -R www-data:www-data /app/storage /app/bootstrap && \
     chmod -R 777 /app/storage /app/bootstrap && \
