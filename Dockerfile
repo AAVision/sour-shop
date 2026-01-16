@@ -90,11 +90,7 @@ RUN mkdir -p /app/storage/logs /app/bootstrap/cache && \
     chmod -R 775 /app/app/Providers /app/lang /app/routes
 
 # Expose port (Laravel Octane will run on this)
-EXPOSE 9000
-
-# Health check
-HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:9000/health || exit 1
+EXPOSE 80
 
 # Start PHP-FPM
 CMD ["php-fpm"]
