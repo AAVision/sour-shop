@@ -12,6 +12,7 @@ use App\Http\Controllers\Gateway\PayTabs\ProcessController;
 use App\Http\Controllers\Gateway\Bkash\ExecutePaymentController;
 use App\Http\Controllers\API\ProductLicenseController;
 use App\Http\Controllers\Gateway\PayPal\ProcessController as PayPalProcessController;
+use App\Http\Controllers\HealthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ use App\Http\Controllers\Gateway\PayPal\ProcessController as PayPalProcessContro
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Health check endpoint (for Docker/Coolify)
+Route::get('/health', [HealthController::class, 'check'])->withoutMiddleware('web');
 
 Route::controller(CreateSuperAdmin::class)->middleware('guest')->group(function(){
     Route::get('/create-root', 'index')->name('create.root');
