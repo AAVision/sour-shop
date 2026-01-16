@@ -1,7 +1,7 @@
 # -------------------------------
 # Builder stage
 # -------------------------------
-FROM php:8.2-fpm-alpine AS builder
+FROM php:8.3-fpm-alpine AS builder  # Changed from 8.2 to 8.3
 
 # Install system dependencies and dev libraries for PHP extensions
 RUN apk add --no-cache \
@@ -24,7 +24,29 @@ RUN apk add --no-cache \
     openssl \
     nodejs \
     npm \
-    curl
+    curl \
+    # GD extension dependencies
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libwebp-dev
+
+# Install PHP extensions including GD
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
+    mbstring \
+    mysqli \
+    pdo \
+    pdo_mysql \
+    json \
+    xml \
+    zip \
+    gmp \
+    bcmath \
+    curl \
+    sodium \
+    opcache
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -44,7 +66,7 @@ RUN composer install --no-dev --optimize-autoloader \
 # -------------------------------
 # Production stage
 # -------------------------------
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine  # Changed from 8.2 to 8.3
 
 # Runtime dependencies and dev packages for building PHP extensions
 RUN apk add --no-cache \
@@ -58,6 +80,11 @@ RUN apk add --no-cache \
     bash \
     nodejs \
     npm \
+    # GD runtime dependencies
+    freetype \
+    libjpeg-turbo \
+    libpng \
+    libwebp \
     # Add dev packages for building PHP extensions
     libxml2-dev \
     zlib-dev \
@@ -66,6 +93,10 @@ RUN apk add --no-cache \
     libsodium-dev \
     oniguruma-dev \
     libzip-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
     autoconf \
     gcc \
     g++ \
@@ -73,7 +104,9 @@ RUN apk add --no-cache \
     pkgconfig
 
 # Install PHP extensions (only in production stage)
-RUN docker-php-ext-install -j$(nproc) \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j$(nproc) \
+    gd \
     mbstring \
     mysqli \
     pdo \
@@ -96,6 +129,10 @@ RUN apk del --no-cache \
     libsodium-dev \
     oniguruma-dev \
     libzip-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
     autoconf \
     gcc \
     g++ \
