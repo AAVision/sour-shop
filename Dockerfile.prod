@@ -75,24 +75,20 @@ RUN echo "[opcache]" > /usr/local/etc/php/conf.d/opcache.ini && \
 
 # Create entrypoint script (inline)
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
-    echo 'echo "Starting eCommerce Laravel Application..."' >> /entrypoint.sh && \
-    echo 'echo "Waiting for MySQL ($DB_HOST:$DB_PORT)..."' >> /entrypoint.sh && \
-    echo 'MAX_ATTEMPTS=30' >> /entrypoint.sh && \
-    echo 'ATTEMPT=0' >> /entrypoint.sh && \
-    echo 'while ! nc -z "$DB_HOST" "$DB_PORT" 2>/dev/null; do' >> /entrypoint.sh && \
-    echo '  ATTEMPT=$((ATTEMPT + 1))' >> /entrypoint.sh && \
-    echo '  if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then' >> /entrypoint.sh && \
-    echo '    echo "MySQL unavailable, continuing anyway..."' >> /entrypoint.sh && \
-    echo '    break' >> /entrypoint.sh && \
-    echo '  fi' >> /entrypoint.sh && \
-    echo '  sleep 1' >> /entrypoint.sh && \
-    echo 'done' >> /entrypoint.sh && \
-    echo 'chmod -R 775 /app/storage 2>/dev/null || true' >> /entrypoint.sh && \
-    echo 'chmod -R 775 /app/bootstrap/cache 2>/dev/null || true' >> /entrypoint.sh && \
+    echo 'echo "Starting PHP-FPM..."' >> /entrypoint.sh && \
+    echo 'if [ -n "$DB_HOST" ] && [ "$DB_HOST" != "localhost" ]; then' >> /entrypoint.sh && \
+    echo '  echo "Waiting for database at $DB_HOST:$DB_PORT (max 10 attempts)..."' >> /entrypoint.sh && \
+    echo '  ATTEMPTS=0' >> /entrypoint.sh && \
+    echo '  while ! nc -z "$DB_HOST" "$DB_PORT" 2>/dev/null && [ $ATTEMPTS -lt 10 ]; do' >> /entrypoint.sh && \
+    echo '    ATTEMPTS=$((ATTEMPTS + 1))' >> /entrypoint.sh && \
+    echo '    sleep 1' >> /entrypoint.sh && \
+    echo '  done' >> /entrypoint.sh && \
+    echo 'fi' >> /entrypoint.sh && \
     echo 'php /app/artisan config:cache 2>/dev/null || true' >> /entrypoint.sh && \
     echo 'php /app/artisan route:cache 2>/dev/null || true' >> /entrypoint.sh && \
-    echo 'php /app/artisan cache:clear 2>/dev/null || true' >> /entrypoint.sh && \
-    echo '(php /app/artisan migrate --force 2>/dev/null || true) &' >> /entrypoint.sh && \
+    echo '(sleep 5 && php /app/artisan migrate --force 2>/dev/null || true) &' >> /entrypoint.sh && \
+    echo 'chmod -R 775 /app/storage 2>/dev/null || true' >> /entrypoint.sh && \
+    echo 'chmod -R 775 /app/bootstrap/cache 2>/dev/null || true' >> /entrypoint.sh && \
     echo 'exec "$@"' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 

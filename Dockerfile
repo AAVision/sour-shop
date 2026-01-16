@@ -146,40 +146,31 @@ RUN echo "[program:laravel-worker]" > /etc/supervisor/conf.d/laravel-worker.conf
 # Create entrypoint script (inline)
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
-    echo 'echo "Starting eCommerce Laravel Application..."' >> /entrypoint.sh && \
+    echo 'echo "Starting PHP-FPM..."' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
-    echo 'echo "Waiting for MySQL ($DB_HOST:$DB_PORT)..."' >> /entrypoint.sh && \
-    echo 'MAX_ATTEMPTS=30' >> /entrypoint.sh && \
-    echo 'ATTEMPT=0' >> /entrypoint.sh && \
-    echo 'while ! nc -z "$DB_HOST" "$DB_PORT" 2>/dev/null; do' >> /entrypoint.sh && \
-    echo '  ATTEMPT=$((ATTEMPT + 1))' >> /entrypoint.sh && \
-    echo '  if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then' >> /entrypoint.sh && \
-    echo '    echo "✗ MySQL did not become available after ${MAX_ATTEMPTS} attempts"' >> /entrypoint.sh && \
-    echo '    echo "Continuing anyway (will retry on first request)..."' >> /entrypoint.sh && \
-    echo '    break' >> /entrypoint.sh && \
-    echo '  fi' >> /entrypoint.sh && \
-    echo '  echo "  Attempt $ATTEMPT/$MAX_ATTEMPTS: Waiting for MySQL..."' >> /entrypoint.sh && \
-    echo '  sleep 1' >> /entrypoint.sh && \
-    echo 'done' >> /entrypoint.sh && \
-    echo 'echo "✓ MySQL connection available"' >> /entrypoint.sh && \
+    echo 'if [ -n "$DB_HOST" ] && [ "$DB_HOST" != "localhost" ]; then' >> /entrypoint.sh && \
+    echo '  echo "Waiting for database at $DB_HOST:$DB_PORT (max 10 attempts)..."' >> /entrypoint.sh && \
+    echo '  ATTEMPTS=0' >> /entrypoint.sh && \
+    echo '  while ! nc -z "$DB_HOST" "$DB_PORT" 2>/dev/null && [ $ATTEMPTS -lt 10 ]; do' >> /entrypoint.sh && \
+    echo '    ATTEMPTS=$((ATTEMPTS + 1))' >> /entrypoint.sh && \
+    echo '    echo "  Attempt $ATTEMPTS/10..."' >> /entrypoint.sh && \
+    echo '    sleep 1' >> /entrypoint.sh && \
+    echo '  done' >> /entrypoint.sh && \
+    echo 'fi' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
-    echo 'echo "Setting up storage directories..."' >> /entrypoint.sh && \
-    echo 'chmod -R 775 /app/storage 2>/dev/null || true' >> /entrypoint.sh && \
-    echo 'chmod -R 775 /app/bootstrap/cache 2>/dev/null || true' >> /entrypoint.sh && \
-    echo '' >> /entrypoint.sh && \
-    echo 'echo "Optimizing application..."' >> /entrypoint.sh && \
+    echo 'echo "Optimizing Laravel application..."' >> /entrypoint.sh && \
     echo 'php /app/artisan config:cache 2>/dev/null || true' >> /entrypoint.sh && \
     echo 'php /app/artisan route:cache 2>/dev/null || true' >> /entrypoint.sh && \
     echo 'php /app/artisan view:cache 2>/dev/null || true' >> /entrypoint.sh && \
-    echo 'php /app/artisan cache:clear 2>/dev/null || true' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
-    echo 'echo "Running migrations (in background)..."' >> /entrypoint.sh && \
-    echo '(php /app/artisan migrate --force 2>/dev/null || echo "⚠ Migration skipped or failed") &' >> /entrypoint.sh && \
+    echo 'echo "Running migrations in background..."' >> /entrypoint.sh && \
+    echo '(sleep 5 && php /app/artisan migrate --force 2>/dev/null || true) &' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
+    echo 'chmod -R 775 /app/storage 2>/dev/null || true' >> /entrypoint.sh && \
+    echo 'chmod -R 775 /app/bootstrap/cache 2>/dev/null || true' >> /entrypoint.sh && \
     echo 'php /app/artisan storage:link 2>/dev/null || true' >> /entrypoint.sh && \
     echo '' >> /entrypoint.sh && \
-    echo 'echo "✓ Application ready!"' >> /entrypoint.sh && \
-    echo 'echo "Starting PHP-FPM..."' >> /entrypoint.sh && \
+    echo 'echo "PHP-FPM starting on port 9000..."' >> /entrypoint.sh && \
     echo 'exec "$@"' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
@@ -189,8 +180,8 @@ USER www-data
 # Expose port
 EXPOSE 9000
 
-# Health check (checks PHP-FPM is listening)
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+# Health check - just verify PHP-FPM is listening (doesn't block startup)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD nc -z localhost 9000 || exit 1
 
 # Run entrypoint
