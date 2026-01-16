@@ -81,9 +81,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-                "joynala/web-installer"
-            ]
+            "dont-discover": []
         }
     },
     "config": {
