@@ -1,7 +1,7 @@
 # -------------------------------
 # Builder stage
 # -------------------------------
-FROM php:8.3-fpm-alpine AS builder  # Changed from 8.2 to 8.3
+FROM php:8.3-fpm-alpine AS builder
 
 # Install system dependencies and dev libraries for PHP extensions
 RUN apk add --no-cache \
@@ -66,7 +66,7 @@ RUN composer install --no-dev --optimize-autoloader \
 # -------------------------------
 # Production stage
 # -------------------------------
-FROM php:8.3-fpm-alpine  # Changed from 8.2 to 8.3
+FROM php:8.3-fpm-alpine
 
 # Runtime dependencies and dev packages for building PHP extensions
 RUN apk add --no-cache \
