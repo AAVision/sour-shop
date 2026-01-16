@@ -1,7 +1,9 @@
+# ================================
 # Builder stage
-FROM php:8.2-fpm-alpine as builder
+# ================================
+FROM php:8.2-fpm-alpine AS builder
 
-# Install system dependencies + dev libs for extensions
+# Install system dependencies + dev libs for PHP extensions
 RUN apk add --no-cache \
     bash \
     curl \
@@ -14,15 +16,16 @@ RUN apk add --no-cache \
     gmp-dev \
     libsodium-dev \
     oniguruma-dev \
-    oniguruma \
     autoconf \
     gcc \
     g++ \
     make \
     pkgconfig \
-    openssl \
+    nodejs \
+    npm \
     sqlite \
-    libzip-dev
+    libzip-dev \
+    openssl
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -41,25 +44,24 @@ RUN docker-php-ext-install \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Node.js & npm
-RUN apk add --no-cache nodejs npm
-
 # Set working directory
 WORKDIR /app
 
-# Copy app
+# Copy application source
 COPY . .
 
-# Build dependencies
+# Build PHP & Node dependencies
 RUN composer install --no-dev --optimize-autoloader \
     && npm install \
     && npm run build \
     && rm -rf node_modules
 
+# ================================
 # Production stage
+# ================================
 FROM php:8.2-fpm-alpine
 
-# Runtime dependencies
+# Install runtime dependencies only
 RUN apk add --no-cache \
     curl \
     gmp \
@@ -67,9 +69,12 @@ RUN apk add --no-cache \
     openssl \
     libxml2 \
     oniguruma \
-    zip
+    zip \
+    bash \
+    nodejs \
+    npm
 
-# Install PHP extensions again
+# Install PHP extensions again for runtime
 RUN docker-php-ext-install \
     mysqli \
     pdo \
@@ -89,7 +94,7 @@ COPY docker/php/local.ini /usr/local/etc/php/conf.d/99-local.ini
 # Set working directory
 WORKDIR /app
 
-# Copy built app from builder
+# Copy built app from builder stage
 COPY --from=builder --chown=www-data:www-data /app /app
 
 # Create necessary directories & set permissions
@@ -98,7 +103,7 @@ RUN mkdir -p /app/storage/logs /app/bootstrap/cache \
     && chmod -R 777 /app/storage /app/bootstrap \
     && chmod -R 775 /app/app/Providers /app/lang /app/routes
 
-# Expose port (for Laravel Octane if needed)
+# Expose HTTP port (Laravel Octane optional)
 EXPOSE 80
 
 # Start PHP-FPM
