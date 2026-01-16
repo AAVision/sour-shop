@@ -26,21 +26,6 @@ RUN apk add --no-cache \
     npm \
     curl
 
-# Install PHP extensions
-RUN docker-php-ext-install -j$(nproc) \
-    mbstring \
-    mysqli \
-    pdo \
-    pdo_mysql \
-    json \
-    xml \
-    zip \
-    gmp \
-    bcmath \
-    curl \
-    sodium \
-    opcache
-
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -61,7 +46,7 @@ RUN composer install --no-dev --optimize-autoloader \
 # -------------------------------
 FROM php:8.2-fpm-alpine
 
-# Runtime dependencies
+# Runtime dependencies and dev packages for building PHP extensions
 RUN apk add --no-cache \
     curl \
     gmp \
@@ -72,9 +57,22 @@ RUN apk add --no-cache \
     zip \
     bash \
     nodejs \
-    npm
+    npm \
+    # Add dev packages for building PHP extensions
+    libxml2-dev \
+    zlib-dev \
+    bzip2-dev \
+    gmp-dev \
+    libsodium-dev \
+    oniguruma-dev \
+    libzip-dev \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    pkgconfig
 
-# Install PHP extensions (must match builder)
+# Install PHP extensions (only in production stage)
 RUN docker-php-ext-install -j$(nproc) \
     mbstring \
     mysqli \
@@ -88,6 +86,21 @@ RUN docker-php-ext-install -j$(nproc) \
     curl \
     sodium \
     opcache
+
+# Clean up dev packages to reduce image size
+RUN apk del --no-cache \
+    libxml2-dev \
+    zlib-dev \
+    bzip2-dev \
+    gmp-dev \
+    libsodium-dev \
+    oniguruma-dev \
+    libzip-dev \
+    autoconf \
+    gcc \
+    g++ \
+    make \
+    pkgconfig
 
 # Copy PHP config
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/99-local.ini
